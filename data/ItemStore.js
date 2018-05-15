@@ -19,13 +19,8 @@ class ItemStore extends ReduceStore {
     switch (action.type) {
       case ItemActionTypes.ADD_ITEM:
         noteId++;
-        state.set(noteId, new Item({ noteId, text: action.text }));
-
-        const map1 = state.map(x => x.id);
-
-        console.log(map1);
-
-        return state;
+        return state.set(noteId, new Item({ noteId, text: action.text }));
+      //return state;
 
       default:
         return state;

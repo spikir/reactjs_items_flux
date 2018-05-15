@@ -60,7 +60,7 @@ function Footer(props) {
   return (
     <footer id="footer">
       <span id="todo-count">
-        <strong>{props.todos.size}</strong>
+        <strong>{props.items.size}</strong>
         {" items left"}
       </span>
     </footer>
