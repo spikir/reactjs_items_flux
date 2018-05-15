@@ -19,8 +19,13 @@ class ItemStore extends ReduceStore {
     switch (action.type) {
       case ItemActionTypes.ADD_ITEM:
         noteId++;
-        return state.set(noteId, new Item({ noteId, text: action.text }));
+        return state.set(noteId, new Item({ id: noteId, text: action.text }));
       //return state;
+
+      case ItemActionTypes.DELETE_ITEM:
+        console.log("test" + action.id);
+        console.log(action.type);
+        return state.delete(action.id);
 
       default:
         return state;

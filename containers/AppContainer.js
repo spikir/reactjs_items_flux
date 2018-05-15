@@ -1,6 +1,7 @@
 import AppView from "../views/AppView";
 import { Container } from "flux/utils";
 import ItemStore from "../data/ItemStore";
+import ItemActions from "../data/ItemActions";
 
 function getStores() {
   return [ItemStore];
@@ -8,7 +9,8 @@ function getStores() {
 
 function getState() {
   return {
-    items: ItemStore.getState()
+    items: ItemStore.getState(),
+    onDeleteItem: ItemActions.deleteItem
   };
 }
 

@@ -37,13 +37,12 @@ function Main(props) {
                   () => {}
                 }
               />
-              <label>{todo.text}</label>
+              <label>
+                {todo.text} test {todo.id}
+              </label>
               <button
                 className="destroy"
-                onClick={
-                  // Empty function for now, we will implement this later.
-                  () => {}
-                }
+                onClick={() => props.onDeleteItem(todo.id)}
               />
             </div>
           </li>
