@@ -34,11 +34,13 @@ function Main(props) {
                 checked={todo.complete}
                 onChange={
                   // Empty function for now, we will implement this later.
-                  () => {}
+                  () => {
+                    props.onUpdateItem(todo.id);
+                  }
                 }
               />
               <label>
-                {todo.text} test {todo.id}
+                {todo.text} {todo.id}
               </label>
               <button
                 className="destroy"

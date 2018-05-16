@@ -10,7 +10,8 @@ function getStores() {
 function getState() {
   return {
     items: ItemStore.getState(),
-    onDeleteItem: ItemActions.deleteItem
+    onDeleteItem: ItemActions.deleteItem,
+    onUpdateItem: ItemActions.updateItem
   };
 }
 

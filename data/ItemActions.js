@@ -13,6 +13,12 @@ const Actions = {
       type: ItemActionTypes.DELETE_ITEM,
       id: keyId
     });
+  },
+  updateItem(keyId) {
+    ItemDispatcher.dispatch({
+      type: ItemActionTypes.UPDATE_ITEM,
+      id: keyId
+    });
   }
 };
 
