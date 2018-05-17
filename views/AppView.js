@@ -58,12 +58,19 @@ function Footer(props) {
   if (props.items.size === 0) {
     return null;
   }
+  let counter = 0;
+  props.items.forEach(item => {
+    if (item.complete === false) {
+      counter++;
+    }
+  });
   return (
     <footer id="footer">
       <span id="todo-count">
         <strong>{props.items.size}</strong>
         {" items left"}
       </span>
+      <span>{counter} items left</span>
     </footer>
   );
 }

@@ -19,6 +19,12 @@ const Actions = {
       type: ItemActionTypes.UPDATE_ITEM,
       id: keyId
     });
+  },
+  addDraftItem(text) {
+    ItemDispatcher.dispatch({
+      type: ItemActionTypes.ADD_DRAFT_ITEM,
+      text
+    });
   }
 };
 
