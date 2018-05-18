@@ -23,7 +23,7 @@ const Actions = {
   addDraftItem(text) {
     ItemDispatcher.dispatch({
       type: ItemActionTypes.ADD_DRAFT_ITEM,
-      text
+      text: text
     });
   }
 };

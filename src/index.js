@@ -3,7 +3,7 @@ import NewItemAppContainer from "../containers/NewItemAppContainer";
 import React from "react";
 import ReactDOM from "react-dom";
 import ItemActions from "../data/ItemActions";
-import { HashRouter, Route, Link, Switch } from "react-router-dom";
+import { HashRouter, Route, Link } from "react-router-dom";
 
 const Start = () => <h1 />;
 const addItem = () => <NewItemAppContainer />;
@@ -22,9 +22,3 @@ ReactDOM.render(
   </HashRouter>,
   document.getElementById("root")
 );
-
-ItemActions.addItem("My first task");
-ItemActions.addItem("Another task");
-ItemActions.addItem("Finish this tutorial");
-
-ItemActions.addDraftItem("test");

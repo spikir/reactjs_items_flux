@@ -29,8 +29,8 @@ class ItemStore extends ReduceStore {
         return state.delete(action.id);
 
       case ItemActionTypes.UPDATE_ITEM:
-        return state.update(action.id, item =>
-          item.set("complete", !item.complete)
+        return state.update(action.id, Item =>
+          Item.set("complete", !Item.complete)
         );
 
       default:

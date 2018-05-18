@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 
 function NewItemView(props) {
   return (
@@ -21,10 +22,14 @@ function Header() {
 function Main(props) {
   return (
     <div>
-      <input type="text" />
+      <input type="text" className="newItem" />
       <button
         onClick={() => {
-          props.onAddDraftItem("text");
+          if (document.getElementsByClassName("newItem")[0].value !== "") {
+            props.onAddDraftItem(
+              document.getElementsByClassName("newItem")[0].value
+            );
+          }
         }}
       />
     </div>
@@ -37,7 +42,7 @@ function Footer(props) {
   }
   return (
     <footer>
-      <span>{props.items.map(x => x.text)}</span>
+      <span>Footer</span>
     </footer>
   );
 }

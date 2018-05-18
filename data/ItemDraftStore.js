@@ -24,6 +24,14 @@ class ItemDraftStore extends ReduceStore {
           new Item({ id: noteId, text: action.text, complete: false })
         );
 
+      case ItemActionTypes.DELETE_ITEM:
+        return state.delete(action.id);
+
+      case ItemActionTypes.UPDATE_ITEM:
+        return state.update(action.id, item =>
+          item.set("complete", !item.complete)
+        );
+
       default:
         return state;
     }

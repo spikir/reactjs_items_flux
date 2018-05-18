@@ -1,18 +1,17 @@
 import AppView from "../views/AppView";
 import { Container } from "flux/utils";
-import ItemStore from "../data/ItemStore";
+import ItemDraftStore from "../data/ItemDraftStore";
 import ItemActions from "../data/ItemActions";
 
 function getStores() {
-  return [ItemStore];
+  return [ItemDraftStore];
 }
 
 function getState() {
   return {
-    items: ItemStore.getState(),
+    items: ItemDraftStore.getState(),
     onDeleteItem: ItemActions.deleteItem,
-    onUpdateItem: ItemActions.updateItem,
-    onAddDraftItem: ItemActions.onAddDraftItem
+    onUpdateItem: ItemActions.updateItem
   };
 }
 
