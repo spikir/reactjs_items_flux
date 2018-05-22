@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 function NewItemView(props) {
   return (
-    <div>
+    <div className="container">
       <Header />
       <Main {...props} />
       <Footer {...props} />
@@ -21,9 +21,10 @@ function Header() {
 
 function Main(props) {
   return (
-    <div>
+    <div className="newItemWrap">
       <input type="text" className="newItem" />
       <button
+        className="newItemBtn"
         onClick={() => {
           if (document.getElementsByClassName("newItem")[0].value !== "") {
             props.onAddDraftItem(
@@ -31,18 +32,17 @@ function Main(props) {
             );
           }
         }}
-      />
+      >
+        Add Item
+      </button>
     </div>
   );
 }
 
 function Footer(props) {
-  if (props.items.size === 0) {
-    return null;
-  }
   return (
     <footer>
-      <span>Footer</span>
+      <span />
     </footer>
   );
 }

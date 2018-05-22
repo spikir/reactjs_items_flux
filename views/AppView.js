@@ -2,7 +2,7 @@ import React from "react";
 
 function AppView(props) {
   return (
-    <div>
+    <div className="container">
       <Header {...props} />
       <Main {...props} />
       <Footer {...props} />
