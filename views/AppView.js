@@ -24,30 +24,26 @@ function Main(props) {
   }
   return (
     <section id="main">
-      <ul id="todo-list">
+      <ul className="item-list">
         {[...props.items.values()].reverse().map(todo => (
-          <li key={todo.id}>
-            <div className="view">
-              <input
-                className="toggle"
-                type="checkbox"
-                checked={todo.complete}
-                onChange={
-                  // Empty function for now, we will implement this later.
-                  () => {
-                    props.onUpdateItem(todo.id);
-                  }
+          <li className="item" key={todo.id}>
+            <input
+              className="itemCheck"
+              type="checkbox"
+              checked={todo.complete}
+              onChange={
+                // Empty function for now, we will implement this later.
+                () => {
+                  props.onUpdateItem(todo.id);
                 }
-              />
-              <label>
-                {todo.text} {todo.id}
-              </label>
+              }
+            />
+            <label className="itemText">{todo.text}</label>
 
-              <button
-                className="destroy"
-                onClick={() => props.onDeleteItem(todo.id)}
-              />
-            </div>
+            <button
+              className="deleteNote"
+              onClick={() => props.onDeleteItem(todo.id)}
+            />
           </li>
         ))}
       </ul>
