@@ -4,23 +4,81 @@ function AppView(props) {
   return (
     <div className="container">
       <Header {...props} />
-      <Main
-        mainProp={props.items}
-        update={props.onUpdateItem}
-        delete={props.onDeleteItem}
-      />
+      <Main {...props} />
       <Footer {...props} />
     </div>
   );
 }
+
+let input = false;
+
+const Item = ({
+  todo,
+  checkItem,
+  deleteItem,
+  addValue,
+  handleChange,
+  inputValue
+}) => {
+  if (input === true) {
+    input = false;
+    alert(inputValue);
+    return (
+      <li className="item" key={todo.id}>
+        <input
+          className="itemCheck"
+          type="checkbox"
+          checked={todo.complete}
+          onChange={
+            // Empty function for now, we will implement this later.
+            () => {
+              checkItem(todo.id);
+            }
+          }
+        />
+        <input type="text" value={inputValue} onChange={handleChange} />
+        <button className="deleteNote" onClick={() => deleteItem(todo.id)}>
+          Delete Item
+        </button>
+      </li>
+    );
+  } else {
+    return (
+      <li className="item" key={todo.id}>
+        <input
+          className="itemCheck"
+          type="checkbox"
+          checked={todo.complete}
+          onChange={
+            // Empty function for now, we will implement this later.
+            () => {
+              checkItem(todo.id);
+            }
+          }
+        />
+        <label
+          className="itemText"
+          onDoubleClick={() => {
+            addValue(todo.text);
+            input = true;
+          }}
+        >
+          {todo.text}
+        </label>
+        <button className="deleteNote" onClick={() => deleteItem(todo.id)}>
+          Delete Item
+        </button>
+      </li>
+    );
+  }
+};
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
     this.state = {
-      input: "",
-      value: false
+      input: ""
     };
   }
   handleChange(e) {
@@ -28,49 +86,25 @@ class Main extends React.Component {
   }
 
   addValue(text, e) {
-    this.setState({ input: text, value: true });
+    this.setState({ input: text });
   }
+
   render() {
     return (
       <section id="main">
         <ul className="item-list">
-          {this.props.mainProp.reverse().map(todo => (
-            <li className="item" key={todo.id}>
-              <input
-                className="itemCheck"
-                type="checkbox"
-                checked={todo.complete}
-                onChange={
-                  // Empty function for now, we will implement this later.
-                  () => {
-                    this.props.update(todo.id);
-                  }
-                }
+          {[...this.props.items.values()]
+            .reverse()
+            .map(todo => (
+              <Item
+                todo={todo}
+                checkItem={this.props.onUpdateItem.bind(this)}
+                deleteItem={this.props.onDeleteItem.bind(this)}
+                addValue={this.addValue.bind(this)}
+                handleChange={this.handleChange.bind(this)}
+                inputValue={this.state.input}
               />
-
-              {this.state.value === true && (
-                <input
-                  type="text"
-                  value={this.state.input}
-                  onChange={this.handleChange.bind(this)}
-                />
-              )}
-              {this.state.value === false && (
-                <label
-                  className="itemText"
-                  onDoubleClick={this.addValue.bind(this, todo.text)}
-                >
-                  {todo.text}
-                </label>
-              )}
-              <button
-                className="deleteNote"
-                onClick={() => this.props.delete(todo.id)}
-              >
-                Delete Item
-              </button>
-            </li>
-          ))}
+            ))}
         </ul>
       </section>
     );
