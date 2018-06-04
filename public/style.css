@@ -70,3 +70,12 @@
   position: relative;
   vertical-align: middle;
 }
+
+.editItem {
+  height: 100%;
+  width: 60%;
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  vertical-align: middle;
+}

@@ -10,7 +10,7 @@ function AppView(props) {
   );
 }
 
-let input = false;
+let locked = false;
 
 const Item = ({
   todo,
@@ -18,11 +18,10 @@ const Item = ({
   deleteItem,
   addValue,
   handleChange,
+  editKey,
   inputValue
 }) => {
-  if (input === true) {
-    input = false;
-    alert(inputValue);
+  if (todo.label === false && locked === false) {
     return (
       <li className="item" key={todo.id}>
         <input
@@ -36,7 +35,15 @@ const Item = ({
             }
           }
         />
-        <input type="text" value={inputValue} onChange={handleChange} />
+        <input
+          type="text"
+          value={inputValue}
+          onChange={handleChange}
+          onKeyDown={event => {
+            editKey(event);
+          }}
+          className="editItem"
+        />
         <button className="deleteNote" onClick={() => deleteItem(todo.id)}>
           Delete Item
         </button>
@@ -60,7 +67,6 @@ const Item = ({
           className="itemText"
           onDoubleClick={() => {
             addValue(todo.text);
-            input = true;
           }}
         >
           {todo.text}
@@ -81,12 +87,27 @@ class Main extends React.Component {
       input: ""
     };
   }
+
   handleChange(e) {
+    locked = false;
     this.setState({ input: e.target.value });
   }
 
-  addValue(text, e) {
-    this.setState({ input: text });
+  addValue(props, id, text, e) {
+    if (locked === false) {
+      props.onChangeText(id);
+      this.setState({ input: text }, function() {
+        locked = true;
+      });
+    }
+  }
+
+  handleKeyPress(props, id, event) {
+    if (event.key === "Enter" && this.state.input !== "") {
+      props.onSaveChanges(id, this.state.input);
+      props.onChangeText(id);
+      locked = false;
+    }
   }
 
   render() {
@@ -100,9 +121,11 @@ class Main extends React.Component {
                 todo={todo}
                 checkItem={this.props.onUpdateItem.bind(this)}
                 deleteItem={this.props.onDeleteItem.bind(this)}
-                addValue={this.addValue.bind(this)}
+                addValue={this.addValue.bind(this, this.props, todo.id)}
                 handleChange={this.handleChange.bind(this)}
+                editKey={this.handleKeyPress.bind(this, this.props, todo.id)}
                 inputValue={this.state.input}
+                key={todo.id}
               />
             ))}
         </ul>

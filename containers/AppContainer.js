@@ -11,7 +11,9 @@ function getState() {
   return {
     items: ItemDraftStore.getState(),
     onDeleteItem: ItemActions.deleteItem,
-    onUpdateItem: ItemActions.updateItem
+    onUpdateItem: ItemActions.updateItem,
+    onChangeText: ItemActions.changeText,
+    onSaveChanges: ItemActions.saveChanges
   };
 }
 

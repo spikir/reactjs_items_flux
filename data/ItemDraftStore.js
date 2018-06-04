@@ -32,6 +32,14 @@ class ItemDraftStore extends ReduceStore {
           item.set("complete", !item.complete)
         );
 
+      case ItemActionTypes.CHANGE_TEXT:
+        return state.update(action.id, item => item.set("label", !item.label));
+
+      case ItemActionTypes.SAVE_CHANGES:
+        return state.update(action.id, item =>
+          item.set("text", action.text, "label", !item.label)
+        );
+
       default:
         return state;
     }

@@ -25,6 +25,19 @@ const Actions = {
       type: ItemActionTypes.ADD_DRAFT_ITEM,
       text: text
     });
+  },
+  changeText(keyId) {
+    ItemDispatcher.dispatch({
+      type: ItemActionTypes.CHANGE_TEXT,
+      id: keyId
+    });
+  },
+  saveChanges(keyId, text) {
+    ItemDispatcher.dispatch({
+      type: ItemActionTypes.SAVE_CHANGES,
+      id: keyId,
+      text: text
+    });
   }
 };
 
